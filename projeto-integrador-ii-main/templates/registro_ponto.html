@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Folha de Ponto</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+        table { width: 100%; margin-top: 20px; }
+        input[type="text"] { padding: 5px; width: 200px; }
+        input[type="submit"] { padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <h1>Registro de Ponto</h1>
+    <form method="POST">
+        <label>Nome:</label>
+        <input type="text" name="nome" required>
+        <input type="submit" name="tipo" value="entrada">
+        <input type="submit" name="tipo" value="saida">
+    </form>
+
+    <h2>Registros</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Saída</th>
+        </tr>
+        {% for r in registros %}
+        <tr>
+            <td>{{ r.nome }}</td>
+            <td>{{ r.data.strftime('%Y-%m-%d') }}</td>
+            <td>{{ r.entrada.strftime('%H:%M:%S') if r.entrada else '---' }}</td>
+            <td>{{ r.saida.strftime('%H:%M:%S') if r.saida else '---' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
